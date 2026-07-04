@@ -74,6 +74,20 @@ Transitioning from traditional flat pandas calculations to an event-driven agent
 
 ---
 
+├── quant_engine/             # <-- Foundational package core
+│   ├── __init__.py
+│   ├── config.py             # <-- Backtest params & execution schemas
+│   ├── data_handler.py       # <-- Tier 7: Ingests, checks, and cleans OHLCV data
+│   ├── indicators.py         # <-- Tier 4: Accelerated Numba feature structures
+│   └── engine.py             # <-- Tier 5: Matrix backtester execution core
+├── deployment/
+│   ├── app.py                # <-- Tier 2/4 API Ingress Gateway
+│   ├── Dockerfile            # <-- Runtime Container Environment
+│   └── docker-compose.yml    # <-- Full 7-Tier Distributed Infrastructure Mesh
+├── dailylog.md               # <-- System Operations & Hygiene Ledger
+└── requirements.txt          # <-- Performance dependencies (numpy, pandas, numba, fastapi)
+
+
 ## 🚀 Quick Start Instructions
 
 ### Prerequisites
