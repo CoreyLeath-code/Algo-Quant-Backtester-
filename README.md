@@ -12,7 +12,12 @@
 ![Security Scan](https://img.shields.io/badge/security-bandit%20passed-059669?style=flat-square)
 ![Simulation SLA](https://img.shields.io/badge/Simulation_SLA-p95_%3C_15ms-blueviolet?style=flat-square)
 ![Throughput](https://img.shields.io/badge/Throughput-45k_ticks%2Fsec-orange?style=flat-square)
-
+[![Quant Hygiene Matrix](https://github.com/CoreyLeath-code/Algo-Quant-Backtester-/actions/workflows/quant-hygiene.yml/badge.svg)](https://github.com/CoreyLeath-code/Algo-Quant-Backtester-/actions/workflows/quant-hygiene.yml)
+![Engine Hygiene](https://img.shields.io/badge/Engine%20Hygiene-Enforced-brightgreen?style=flat-square&logo=github)
+![Data Contracts](https://img.shields.io/badge/Data%20Contracts-OHLCV%20Validated-blue?style=flat-square&logo=pydantic)
+![Backtest Performance](https://img.shields.io/badge/Backtest%20Performance-Vectorized%20%7C%20Numba-orange?style=flat-square&logo=numpy)
+![SAST Scanning](https://img.shields.io/badge/SAST%20Scan-CodeQL%20Passing-emerald?style=flat-square&logo=githubactions)
+![Security Shield](https://img.shields.io/badge/Security%20Shield-TruffleHog%20Active-red?style=flat-square&logo=shield)
 
 
 Algo-Quant-Backtester is a high-performance, institutional-grade quantitative simulation platform engineered to execute multi-asset strategy backtests at massive scale. Moving past basic single-threaded linear pandas execution matrices, this architecture leverages an asynchronous **Supervisor-Worker Agent framework** integrated with an intelligent **Generative AI Risk Analyst (Claude 3.5 Sonnet)**. Backed by immutable portfolio context state tracking records and an active risk safety circuit breaker, the engine guarantees complete data precision and sub-5ms risk isolation under highly volatile market simulation tracks.
