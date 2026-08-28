@@ -1,0 +1,41 @@
+{
+  "deterministic_result_snapshot": {
+    "annualized_volatility": 0.11315564,
+    "cagr": 0.00345836,
+    "calmar_ratio": 0.01171549,
+    "expectancy": 3.91e-05,
+    "max_drawdown": -0.2951953,
+    "profit_factor": 1.01922218,
+    "sharpe_ratio": 0.08707647,
+    "sortino_ratio": 0.12426827,
+    "total_return": 0.07090041,
+    "win_rate": 0.49197462
+  },
+  "environment": {
+    "git_sha": "b88a8e7f6c7fdd7bfa89b330c8b7ab204a554b5b",
+    "numpy": "2.4.6",
+    "pandas": "2.3.3",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.11.16"
+  },
+  "interpretation": "Performance is a development benchmark of deterministic synthetic research execution, not evidence of trading profitability or production/live-market latency.",
+  "performance": {
+    "backtests_per_second": 87.537929,
+    "mean_ms": 11.302475,
+    "median_ms": 11.229583,
+    "p95_ms": 12.03869,
+    "p99_ms": 12.477608,
+    "peak_traced_memory_mib": 2.231567,
+    "rows_per_second": 437689.646
+  },
+  "protocol": {
+    "commission_rate": 0.0005,
+    "measured_iterations": 50,
+    "rows_per_backtest": 5000,
+    "scope": "in-process synthetic-data backtest; excludes network, market-data I/O, dashboards, and live execution",
+    "seed": 20260828,
+    "slippage_rate": 0.0002,
+    "strategy": "SMA(20,50), long-only",
+    "warmups": 5
+  }
+}
