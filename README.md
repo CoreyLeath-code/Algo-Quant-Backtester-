@@ -1,11 +1,12 @@
 # AlgoQuant Backtester — Reproducible Quant Research Toolkit
 
-[![CI](https://github.com/CoreyLeath-code/Algo-Quant-Backtester-/actions/workflows/ci.yml/badge.svg)](https://github.com/CoreyLeath-code/Algo-Quant-Backtester-/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/CoreyLeath-code/Algo-Quant-Backtester-/actions/workflows/codeql.yml/badge.svg)](https://github.com/CoreyLeath-code/Algo-Quant-Backtester-/actions/workflows/codeql.yml)
-[![Latest Release](https://img.shields.io/github/v/release/CoreyLeath-code/Algo-Quant-Backtester-?display_name=tag&sort=semver)](https://github.com/CoreyLeath-code/Algo-Quant-Backtester-/releases/latest)
+[![CI](https://github.com/CoreyLeath-code/Algo-Quant-Backtester-/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/CoreyLeath-code/Algo-Quant-Backtester-/actions/workflows/ci.yml?query=branch%3Amain)
+[![CodeQL](https://github.com/CoreyLeath-code/Algo-Quant-Backtester-/actions/workflows/codeql.yml/badge.svg?branch=main&event=push)](https://github.com/CoreyLeath-code/Algo-Quant-Backtester-/actions/workflows/codeql.yml?query=branch%3Amain)
+[![Release](https://img.shields.io/badge/release-v0.1.0-2ea44f?logo=github&logoColor=white)](https://github.com/CoreyLeath-code/Algo-Quant-Backtester-/releases/tag/v0.1.0)
 [![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-3776AB?logo=python&logoColor=white)](pyproject.toml)
+[![Coverage](https://img.shields.io/badge/coverage-84.65%25-2ea44f?logo=pytest&logoColor=white)](https://github.com/CoreyLeath-code/Algo-Quant-Backtester-/actions/workflows/ci.yml?query=branch%3Amain)
 [![License](https://img.shields.io/github/license/CoreyLeath-code/Algo-Quant-Backtester-)](LICENSE)
-[![Package](https://img.shields.io/badge/GHCR-algo--quant--backtester-2496ED?logo=docker&logoColor=white)](https://github.com/CoreyLeath-code/Algo-Quant-Backtester-/pkgs/container/algo-quant-backtester)
+[![GHCR](https://img.shields.io/badge/GHCR-v0.1.0%20published-2496ED?logo=docker&logoColor=white)](https://github.com/CoreyLeath-code/Algo-Quant-Backtester-/pkgs/container/algo-quant-backtester)
 
 AlgoQuant Backtester is a compact Python research toolkit for deterministic bar-based strategy simulation. The v0.1 release contract is intentionally narrower than the repository's older portfolio language: the verified core provides one-bar-lagged execution, explicit turnover costs, reference SMA/RSI/MACD strategies, descriptive risk/return metrics, a reproducible synthetic benchmark, fail-closed CI, Python distributions, and a versioned container package.
 
