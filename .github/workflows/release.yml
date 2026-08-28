@@ -1,0 +1,93 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  release:
+    name: Publish v0.1.0 release and GHCR package
+    if: startsWith(github.event.head_commit.message, 'release: v0.1.0')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Verify version is unreleased
+        run: |
+          git fetch --tags --force
+          if git rev-parse -q --verify "refs/tags/v0.1.0" >/dev/null; then
+            echo "v0.1.0 already exists; refusing to overwrite an immutable release boundary."
+            exit 1
+          fi
+      - name: Install release toolchain
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+      - name: Re-run release gates
+        run: |
+          python -m compileall -q algoquant tests
+          ruff check algoquant tests
+          python -m pytest tests -v \
+            --cov=algoquant \
+            --cov-config=.coveragerc \
+            --cov-report=term-missing \
+            --junitxml=pytest-results.xml
+          python -m build
+          python -m algoquant.benchmark \
+            --rows 5000 \
+            --iterations 50 \
+            --warmups 5 \
+            --seed 20260828 \
+            --output benchmark-results.json
+      - name: Generate source archive and checksums
+        run: |
+          git archive --format=tar.gz --prefix=algoquant-backtester-0.1.0/ \
+            -o algoquant-backtester-0.1.0-source.tar.gz HEAD
+          sha256sum dist/* benchmark-results.json algoquant-backtester-0.1.0-source.tar.gz > SHA256SUMS
+      - name: Generate CycloneDX SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          path: .
+          format: cyclonedx-json
+          output-file: sbom.cdx.json
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and publish versioned container
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/coreyleath-code/algo-quant-backtester:0.1.0
+            ghcr.io/coreyleath-code/algo-quant-backtester:latest
+      - name: Create immutable tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a v0.1.0 -m "AlgoQuant Backtester v0.1.0"
+          git push origin v0.1.0
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create v0.1.0 \
+            dist/* \
+            benchmark-results.json \
+            algoquant-backtester-0.1.0-source.tar.gz \
+            SHA256SUMS \
+            sbom.cdx.json \
+            --title "AlgoQuant Backtester v0.1.0" \
+            --notes-file RELEASE_NOTES_v0.1.0.md

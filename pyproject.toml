@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=70", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "algoquant-backtester"
+version = "0.1.0"
+description = "Deterministic, evidence-oriented quantitative backtesting research toolkit"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Corey Leath" }]
+dependencies = [
+  "numpy>=1.24,<3",
+  "pandas>=2.0,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "build>=1.2,<2",
+  "pytest>=8,<9",
+  "pytest-cov>=5,<7",
+  "ruff>=0.9,<1",
+]
+research = [
+  "matplotlib>=3.8,<4",
+  "scikit-learn>=1.4,<2",
+  "numba>=0.58,<1",
+]
+
+[project.scripts]
+algoquant-backtest = "algoquant.cli:main"
+algoquant-benchmark = "algoquant.benchmark:main"
+
+[tool.setuptools.packages.find]
+include = ["algoquant*"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

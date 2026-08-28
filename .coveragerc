@@ -1,0 +1,10 @@
+[run]
+source = algoquant
+omit =
+    algoquant/benchmark.py
+    algoquant/cli.py
+
+[report]
+show_missing = True
+skip_covered = False
+fail_under = 80

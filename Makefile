@@ -1,36 +1,22 @@
-# Makefile for AlgoQuant Backtester & Signal Engine
+.PHONY: install lint test demo benchmark build reproduce
 
-.PHONY: deps lint test backtest serve deploy clean
+install:
+	python -m pip install -e ".[dev]"
 
-# Install Python dependencies
-deps:
-	pip install -r requirements.txt
-
-# Lint Python code
 lint:
-	flake8 src/
+	python -m compileall -q algoquant tests
+	ruff check algoquant tests
 
-# Run unit tests
 test:
-	pytest --maxfail=1 --disable-warnings -q
+	python -m pytest tests -v --cov=algoquant --cov-config=.coveragerc --cov-report=term-missing --cov-report=xml --junitxml=pytest-results.xml
 
-# Run the backtester module
-backtest:
-	python src/backtest/backtest.py --config configs/backtest.yaml
+demo:
+	python -m algoquant.cli --rows 1000 --seed 20260828
 
-# Start the FastAPI signal service
-serve:
-	uvicorn src.serve.app:app --reload --port 8000
+benchmark:
+	python -m algoquant.benchmark --rows 5000 --iterations 50 --warmups 5 --seed 20260828 --output benchmark-results.json
 
-# Deploy to Kubernetes via kubectl (assumes context/config set)
-deploy:
-	kubectl apply -f k8s/
+build:
+	python -m build
 
-# Clean up caches and temporary files
-clean:
-	find . -type d -name "__pycache__" -exec rm -rf {} + && \
-	rm -rf data/processed models/*.pkl
-
-git add Makefile
-git commit -m "Add Makefile with common tasks"
-git push
+reproduce: lint test benchmark build
