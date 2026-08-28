@@ -11,7 +11,7 @@ permissions:
 jobs:
   release:
     name: Publish v0.1.0 release and GHCR package
-    if: startsWith(github.event.head_commit.message, 'release: v0.1.0')
+    if: "${{ startsWith(github.event.head_commit.message, 'release: v0.1.0') }}"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
