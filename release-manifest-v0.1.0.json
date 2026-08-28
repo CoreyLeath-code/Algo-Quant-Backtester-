@@ -1,0 +1,14 @@
+{
+  "version": "0.1.0",
+  "source_merge_commit": "a7c1c171e96a242b0030ac3ccd6e3d421568ea58",
+  "release_contract": ".github/workflows/release.yml",
+  "artifacts": [
+    "wheel",
+    "source_distribution",
+    "source_archive",
+    "benchmark-results.json",
+    "SHA256SUMS",
+    "sbom.cdx.json",
+    "ghcr.io/coreyleath-code/algo-quant-backtester:0.1.0"
+  ]
+}
