@@ -12,7 +12,12 @@ def _validate_window(name: str, value: int) -> int:
 class SMAStrategy:
     """Simple moving-average crossover strategy."""
 
-    def __init__(self, short_window: int = 20, long_window: int = 50, allow_short: bool = False) -> None:
+    def __init__(
+        self,
+        short_window: int = 20,
+        long_window: int = 50,
+        allow_short: bool = False,
+    ) -> None:
         self.short_window = _validate_window("short_window", short_window)
         self.long_window = _validate_window("long_window", long_window)
         if self.short_window >= self.long_window:
@@ -66,7 +71,13 @@ class RSIStrategy:
 class MACDStrategy:
     """MACD line/signal-line crossover strategy."""
 
-    def __init__(self, fast: int = 12, slow: int = 26, signal: int = 9, allow_short: bool = False) -> None:
+    def __init__(
+        self,
+        fast: int = 12,
+        slow: int = 26,
+        signal: int = 9,
+        allow_short: bool = False,
+    ) -> None:
         self.fast = _validate_window("fast", fast)
         self.slow = _validate_window("slow", slow)
         self.signal = _validate_window("signal", signal)
