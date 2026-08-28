@@ -35,14 +35,24 @@ def run_benchmark(*, rows: int, iterations: int, warmups: int, seed: int) -> dic
     strategy = SMAStrategy(short_window=20, long_window=50)
 
     for _ in range(warmups):
-        Backtester(data=market, strategy=strategy, commission=0.0005, slippage=0.0002).run()
+        Backtester(
+            data=market,
+            strategy=strategy,
+            commission=0.0005,
+            slippage=0.0002,
+        ).run()
 
     durations_ms: list[float] = []
     tracemalloc.start()
     started = time.perf_counter()
     last_engine: Backtester | None = None
     for _ in range(iterations):
-        engine = Backtester(data=market, strategy=strategy, commission=0.0005, slippage=0.0002)
+        engine = Backtester(
+            data=market,
+            strategy=strategy,
+            commission=0.0005,
+            slippage=0.0002,
+        )
         t0 = time.perf_counter_ns()
         engine.run()
         durations_ms.append((time.perf_counter_ns() - t0) / 1_000_000.0)
@@ -64,7 +74,10 @@ def run_benchmark(*, rows: int, iterations: int, warmups: int, seed: int) -> dic
             "strategy": "SMA(20,50), long-only",
             "commission_rate": 0.0005,
             "slippage_rate": 0.0002,
-            "scope": "in-process synthetic-data backtest; excludes network, market-data I/O, dashboards, and live execution",
+            "scope": (
+                "in-process synthetic-data backtest; excludes network, market-data I/O, "
+                "dashboards, and live execution"
+            ),
         },
         "environment": {
             "git_sha": os.getenv("GITHUB_SHA", "local-unpinned"),
@@ -83,12 +96,17 @@ def run_benchmark(*, rows: int, iterations: int, warmups: int, seed: int) -> dic
             "peak_traced_memory_mib": round(peak_bytes / (1024 * 1024), 6),
         },
         "deterministic_result_snapshot": metrics,
-        "interpretation": "Performance is a development benchmark of deterministic synthetic research execution, not evidence of trading profitability or production/live-market latency.",
+        "interpretation": (
+            "Performance is a development benchmark of deterministic synthetic research "
+            "execution, not evidence of trading profitability or production/live-market latency."
+        ),
     }
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Run the reproducible AlgoQuant development benchmark.")
+    parser = argparse.ArgumentParser(
+        description="Run the reproducible AlgoQuant development benchmark."
+    )
     parser.add_argument("--rows", type=int, default=5_000)
     parser.add_argument("--iterations", type=int, default=50)
     parser.add_argument("--warmups", type=int, default=5)
@@ -96,7 +114,12 @@ def main() -> None:
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
 
-    report = run_benchmark(rows=args.rows, iterations=args.iterations, warmups=args.warmups, seed=args.seed)
+    report = run_benchmark(
+        rows=args.rows,
+        iterations=args.iterations,
+        warmups=args.warmups,
+        seed=args.seed,
+    )
     rendered = json.dumps(report, indent=2, sort_keys=True, allow_nan=False)
     print(rendered)
     if args.output is not None:
