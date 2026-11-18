@@ -23,7 +23,7 @@ numba>=0.58.1
 pyarrow>=15.0.0
 
 # Production-grade console logging utilities
-rich>=13.7.0
+rich>=15.0.0
 
 # Testing & Continuous Integration suites
 pytest>=8.0.0
