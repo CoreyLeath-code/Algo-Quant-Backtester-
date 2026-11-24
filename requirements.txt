@@ -15,7 +15,7 @@ lightgbm>=4.3.0
 mlflow>=2.11.3
 
 # Utilities & environment orchestration configurations
-pyyaml>=6.0.1
+pyyaml>=6.0.3
 python-dotenv>=1.2.4
 
 # Performance compilation acceleration
